@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from './../../services/Api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -19,5 +20,24 @@ export class LibrosComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  eliminarLibro(id: string) {
+    this.apiService.deleteLibro(id).subscribe((data) => {
+      console.log(data);
+
+      this.apiService.getLibros().subscribe(
+        (data) => {
+          this.libros = data;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    });
+  }
+
+  editarLibro(id: string, body: any) {
+    this.apiService.editarLibro(id, body);
   }
 }

@@ -14,7 +14,7 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit() {
     console.log(environment.backend);
-    this.apiService.getUsuarios().subscribe(
+    this.apiService.getUsuario().subscribe(
       (data: any) => {
         this.informacion = data;
         console.log(this.informacion);

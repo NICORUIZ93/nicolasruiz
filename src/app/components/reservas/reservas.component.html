@@ -1,5 +1,5 @@
 <div class="card-group">
-  <div class="card m-2" *ngFor="let item of libros">
+  <div class="card m-2" *ngFor="let item of reservas">
     <img
       class="card-img-top"
       src="assets/_103401128_gettyimages-1028739954.jpg"
@@ -15,20 +15,8 @@
         <button class="btn btn-primary btn-lg btn-block">Reservar</button>
         <br />
         <small class="text-muted"
-          >Cantidad Disponible {{ item.cantidadDisponible }}</small
+          >Cantidad Reservada {{ item.cantidadReservada }}</small
         >
-        <button class="btn" (click)="eliminarLibro(item.id)">
-          <i class="far fa-trash-alt m-1"></i>
-        </button>
-
-        <button
-          class="btn"
-          (click)="editarLibro(item.id, {})"
-          [routerLink]="['/editar', item.id]"
-          routerLinkActive="router-link-active"
-        >
-          <i class="fas fa-edit"></i>
-        </button>
       </p>
     </div>
   </div>
