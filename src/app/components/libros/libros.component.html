@@ -2,7 +2,7 @@
   <div class="card m-2" *ngFor="let item of libros">
     <img
       class="card-img-top"
-      src="assets/_103401128_gettyimages-1028739954.jpg"
+      src="http://lorempixel.com/g/400/200/"
       alt="Card image cap"
     />
     <div class="card-body">
@@ -18,7 +18,7 @@
         <small class="text-muted"
           >Cantidad Disponible {{ item.cantidadDisponible }}</small
         >
-        <button class="btn" (click)="eliminarLibro(item.id)">
+        <button class="btn" (click)="eliminarLibro(item.id)" *ngIf="estado">
           <i class="far fa-trash-alt m-1"></i>
         </button>
 
@@ -27,6 +27,7 @@
           (click)="editarLibro(item.id, {})"
           [routerLink]="['/editar', item.id]"
           routerLinkActive="router-link-active"
+          *ngIf="estado"
         >
           <i class="fas fa-edit"></i>
         </button>

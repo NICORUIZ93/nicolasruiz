@@ -11,6 +11,7 @@ export class LibrosComponent implements OnInit {
   idUser: any;
   libros: any;
   user: any;
+  estado: boolean = false;
   reservas: any[] = [];
   constructor(
     private apiService: ApiService,
@@ -24,6 +25,9 @@ export class LibrosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.apiService.getUsuarioId(this.idUser).subscribe((data: any) => {
+      this.estado = data.role;
+    });
     this.apiService.getLibros().subscribe(
       (data) => {
         this.libros = data;
