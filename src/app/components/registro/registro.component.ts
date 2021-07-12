@@ -4,12 +4,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrls: ['./registro.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class RegistroComponent implements OnInit {
   form: FormGroup;
+  reservas: any[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
@@ -17,7 +18,9 @@ export class LoginComponent implements OnInit {
   ) {
     this.form = formBuilder.group({
       nombre: [''],
+      apellido: [''],
       contraseña: [''],
+      reservas: [''],
     });
   }
 
@@ -25,15 +28,10 @@ export class LoginComponent implements OnInit {
 
   submit() {
     console.log(this.form.value);
-    this.apiService.login(this.form.value).subscribe((data) => {
-      if (data) {
-        this.apiService.getUsuario(this.form.value).subscribe((data: any) => {
-          console.log(data);
-          this.router.navigate(['biblioteca', data.id]);
-        });
-      } else {
-        console.log('Error en el usuario o contraseña');
-      }
+    this.apiService.crearUsuario(this.form.value).subscribe((dato) => {
+      console.log(dato);
+
+      this.router.navigate(['biblioteca']);
     });
   }
 }

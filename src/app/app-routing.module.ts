@@ -1,3 +1,5 @@
+import { CrearLibroComponent } from './components/crear-libro/crear-libro.component';
+import { RegistroComponent } from './components/registro/registro.component';
 import { LoginComponent } from './components/login/login.component';
 import { EditarComponent } from './components/editar/editar.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
@@ -16,11 +18,19 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'biblioteca',
+    path: 'registro',
+    component: RegistroComponent,
+  },
+  {
+    path: 'crearlibro',
+    component: CrearLibroComponent,
+  },
+  {
+    path: 'biblioteca/:id',
     component: LibrosComponent,
   },
   {
-    path: 'reservas',
+    path: 'reservas/:id',
     component: ReservasComponent,
   },
   {

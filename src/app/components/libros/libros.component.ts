@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from './../../services/Api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,8 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./libros.component.css'],
 })
 export class LibrosComponent implements OnInit {
+  idUser: any;
   libros: any;
-  constructor(private apiService: ApiService) {}
+  user: any;
+  reservas: any[] = [];
+  constructor(
+    private apiService: ApiService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    activatedRoute.params.subscribe((params: any) => {
+      this.idUser = params.id;
+      console.log(this.idUser);
+    });
+  }
 
   ngOnInit(): void {
     this.apiService.getLibros().subscribe(
@@ -39,5 +51,26 @@ export class LibrosComponent implements OnInit {
 
   editarLibro(id: string, body: any) {
     this.apiService.editarLibro(id, body);
+  }
+
+  reservacion() {
+    this.router.navigate(['reservas', this.idUser]);
+  }
+
+  anadir(libro: any) {
+    this.apiService.getUsuarioId(this.idUser).subscribe((user: any) => {
+      this.user = user;
+      this.reservas.push(libro);
+      user.reservas = this.reservas;
+
+      this.apiService
+        .modificarUsuario(this.idUser, this.user)
+        .subscribe((data: any) => {
+          console.log(data);
+          console.log(libro);
+        });
+    });
+
+    // this.user['reservas'] = libro;
   }
 }

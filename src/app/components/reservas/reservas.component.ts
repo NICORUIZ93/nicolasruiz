@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from './../../services/Api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,12 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reservas.component.css'],
 })
 export class ReservasComponent implements OnInit {
-  reservas: any;
-  constructor(private apiService: ApiService) {}
+  reservas: any[] = [];
+  idUser: any;
+  constructor(
+    private apiService: ApiService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.apiService.getLibros().subscribe((data) => {
-      //      this.reservas = data['reservas'];
+    this.activatedRoute.params.subscribe((data) => {
+      this.idUser = data.id;
+      console.log(this.idUser);
+    });
+    this.apiService.getUsuarioId(this.idUser).subscribe((data: any) => {
+      this.reservas = data['reservas'];
+
       console.log(data);
     });
   }

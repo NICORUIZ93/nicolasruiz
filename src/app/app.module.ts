@@ -10,6 +10,8 @@ import { ReservasComponent } from './components/reservas/reservas.component';
 import { EditarComponent } from './components/editar/editar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { CrearLibroComponent } from './components/crear-libro/crear-libro.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { LoginComponent } from './components/login/login.component';
     ReservasComponent,
     EditarComponent,
     LoginComponent,
+    RegistroComponent,
+    CrearLibroComponent,
   ],
   imports: [
     BrowserModule,

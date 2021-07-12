@@ -1,46 +1,66 @@
+import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient, private router: Router) {}
+  url = environment.apiRest;
 
-  getUsuario() {
-    return this.http.get('http://localhost:3000/api/users/all', {
+  constructor(private http: HttpClient) {}
+
+  getUsuario(user: any) {
+    return this.http.post(`${this.url}/api/users/user`, user, {
       responseType: 'json',
     });
   }
+
+  getUsuarioId(user: any) {
+    return this.http.get(`${this.url}/api/users/userid/${user}`);
+  }
+  crearUsuario(user: any) {
+    return this.http.post(`${this.url}/api/users/crear`, user, {
+      responseType: 'text',
+    });
+  }
+
+  modificarUsuario(id: any, user: any) {
+    return this.http.put(`${this.url}/api/users/actualizar/${id}`, user, {
+      responseType: 'text',
+    });
+  }
+
   getLibros() {
-    return this.http.get('http://localhost:3000/api/libros/all', {
+    return this.http.get(`${this.url}/api/libros/all`, {
       responseType: 'json',
     });
   }
 
   getLibro(id: any) {
-    return this.http.get(`http://localhost:3000/api/libros/libro/${id}`, {
+    return this.http.get(`${this.url}/api/libros/libro/${id}`, {
       responseType: 'json',
     });
   }
 
   deleteLibro(id: string) {
-    return this.http.delete(`http://localhost:3000/api/libros/eliminar/${id}`, {
+    return this.http.delete(`${this.url}/api/libros/eliminar/${id}`, {
+      responseType: 'text',
+    });
+  }
+
+  CrearLibro(body: any) {
+    return this.http.post(`${this.url}/api/libros/crear`, body, {
       responseType: 'text',
     });
   }
 
   editarLibro(id: string, body: any) {
-    return this.http.put(
-      `http://localhost:3000/api/libros/actualizar/${id}`,
-      body,
-      {
-        responseType: 'text',
-      }
-    );
+    return this.http.put(`${this.url}/api/libros/actualizar/${id}`, body, {
+      responseType: 'text',
+    });
   }
   login(user: any) {
-    return this.http.get(`http://localhost:3000/api/login/user`, user);
+    return this.http.post(`${this.url}/api/login/user`, user);
   }
 }

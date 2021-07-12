@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/Api.service';
-import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,16 +11,5 @@ export class UsuariosComponent implements OnInit {
 
   constructor(private apiService: ApiService) {}
 
-  ngOnInit() {
-    console.log(environment.backend);
-    this.apiService.getUsuario().subscribe(
-      (data: any) => {
-        this.informacion = data;
-        console.log(this.informacion);
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
-  }
+  ngOnInit() {}
 }
